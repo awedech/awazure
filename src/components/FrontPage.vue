@@ -40,11 +40,7 @@ export default {
     },
     async created(){
         try {
-            const response = await axios.get("/pfetch?pid",{
-                headers:{
-                    'Ocp-Apim-Subscription-Key': process.env.VUE_APP_SOME_KEY
-                }
-            })
+            const response = await axios.get("https://awazure-apim.azure-api.net/pfetch/pfetch")
             this.posts = response.data
         } catch (e) {
             this.error.push(e)
