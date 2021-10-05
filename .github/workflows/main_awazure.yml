@@ -32,8 +32,6 @@ jobs:
         with:
           name: node-app
           path: .
-          
-      
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,5 +52,5 @@ jobs:
         with:
           app-name: 'awazure'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FA749873CE5E425687FFF7CA7AD34FB5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BDA70946D3534F21A15E3671D07475B2 }}
           package: .
