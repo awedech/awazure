@@ -1,27 +1,46 @@
 <template>
 <v-app>
-    
-<v-row  justify="center">
-    <v-col cols="8">
-        <h2 align="center">AWAZURE</h2>
-        <v-data-table
-            :headers="headers"
-            :items="posts">
-        </v-data-table>
-    </v-col>
-</v-row>
+    <v-col v-for="p in posts" :key="p.id" cols="4">    
+    <v-card>
+        <v-card-text>
+            <h2>{{p.name}}</h2><br>
+            {{p.desc}}
+        </v-card-text>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn icon
+                color="red"
+                @click="productClicked(p)">
+                <v-icon>
+                    mdi-basket
+                </v-icon>
+                KAUFEN
+            </v-btn>
+            <v-spacer></v-spacer>
+        </v-card-actions>
+    </v-card>
+</v-col>
+
+<video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="poster.jpg" data-setup='{"nativeControlsForTouch": false}'>
+        <source src="https://basicendpoint-videoservice-euwe.streaming.media.azure.net/2c9d856d-4816-42a6-8cf2-3415c044afb8/Watch.ism/manifest
+" type="application/vnd.ms-sstr+xml" />
+        <p class="amp-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+        </p>
+    </video>
+
 </v-app>
   
 </template>
 
 <script>
 
-import axios from 'axios';
-
 export default {
     data(){
         return{
-            posts : [],
+            posts : [{"id": "1", "name": "ruby", "desc": "A red and beautiful ruby"},
+            {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"}, 
+            {"id": "2", "name": "sapphire", "desc": "A blue and beautiful sapphire"}, {"id": "3", "name": "emerald", "desc": "A green and beautiful emerald"}],
             error: [],
             headers:[
                 {
@@ -45,10 +64,17 @@ export default {
         } catch (e) {
             this.error.push(e)
         }
-    }
+    },
+
+    mounted() {
+      let azureScript = document.createElement('script')
+      azureScript.setAttribute('src', 'https://amp.azure.net/libs/amp/latest/azuremediaplayer.min.js')
+      document.head.appendChild(azureScript)
+    },
 }
 </script>
 
-<style>
 
+<style>
+@import 'https://amp.azure.net/libs/amp/latest/skins/amp-default/azuremediaplayer.min.css';
 </style>
