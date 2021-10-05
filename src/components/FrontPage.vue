@@ -3,7 +3,7 @@
     <v-col v-for="p in posts" :key="p.id" cols="4">    
     <v-card>
         <v-card-text>
-            <h2>{{p.name}}</h2><br>
+            <h2>{{p.id}}</h2><br>
             {{p.desc}}
         </v-card-text>
         <v-card-actions>
