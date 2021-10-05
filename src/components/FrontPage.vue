@@ -38,9 +38,7 @@
 export default {
     data(){
         return{
-            posts : [{"id": "1", "name": "ruby", "desc": "A red and beautiful ruby"},
-            {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"}, 
-            {"id": "2", "name": "sapphire", "desc": "A blue and beautiful sapphire"}, {"id": "3", "name": "emerald", "desc": "A green and beautiful emerald"}],
+            posts : [],
             error: [],
             headers:[
                 {
