@@ -24,7 +24,7 @@
         </v-card-text>
         <v-card-actions class="justify-center">
             <v-spacer></v-spacer>
-            <v-btn icon x-large color="red">
+            <v-btn icon x-large color="red" @click="buyProduct(p)">
                 <v-icon>
                     mdi-basket
                 </v-icon>
@@ -47,7 +47,7 @@
 <script>
 import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
 import InnerImageZoom from 'vue-inner-image-zoom';
-//import axios from 'axios';
+import axios from 'axios';
 export default {
     name:'ProductCard',
     components:{
@@ -82,6 +82,15 @@ export default {
     methods:{
         goToVideoplayer(){
             this.$router.push({path:'videoplayer'})
+        },
+        async buyProduct(p){
+         try {
+             const response = await axios.post("https://queueorder.azurewebsites.net/api/queueorder",{pid:p.id})
+             this.posts = response.data
+         } catch (e) {
+             this.error.push(e)
+         }
+
         }
     }
 
