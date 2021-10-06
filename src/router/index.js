@@ -9,6 +9,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    mode: 'history',
     path: '/',
     name: 'FrontPage',
     component: FrontPage 
