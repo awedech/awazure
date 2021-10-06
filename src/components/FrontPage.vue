@@ -21,7 +21,7 @@
     </v-card>
 </v-col>
 
-<video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" poster="poster.jpg" data-setup='{"nativeControlsForTouch": false}'>
+<video id="vid1" class="azuremediaplayer amp-default-skin" autoplay controls width="640" height="400" data-setup='{"nativeControlsForTouch": false}'>
         <source src="https://basicendpoint-videoservice-euwe.streaming.media.azure.net/2c9d856d-4816-42a6-8cf2-3415c044afb8/Watch.ism/manifest
 " type="application/vnd.ms-sstr+xml" />
         <p class="amp-no-js">
