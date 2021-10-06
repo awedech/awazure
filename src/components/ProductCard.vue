@@ -12,16 +12,19 @@
         <v-card-title class="justify-center">{{p.name}}</v-card-title>
         <v-card-text class="text-center">
             <p>{{p.desc}}</p>
-            <v-img
+            <!-- <v-img
             :src="link"
             height="200"
             width="200"
             style="position:relative;left:30px"
-            ></v-img>
+            ></v-img> -->
+            <inner-image-zoom :src="link" :zoomSrc="link_big" />
+
+
         </v-card-text>
         <v-card-actions class="justify-center">
             <v-spacer></v-spacer>
-            <v-btn icon x-large color="red">
+            <v-btn icon x-large color="red" @click="buyProduct(p)">
                 <v-icon>
                     mdi-basket
                 </v-icon>
@@ -31,7 +34,6 @@
                     mdi-video
                 </v-icon>
             </v-btn>
-
             <v-spacer></v-spacer>
         </v-card-actions>
     </v-card>
@@ -43,10 +45,14 @@
 </template>
 
 <script>
-//import axios from 'axios';
-
+import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
+import InnerImageZoom from 'vue-inner-image-zoom';
+import axios from 'axios';
 export default {
     name:'ProductCard',
+    components:{
+            'inner-image-zoom': InnerImageZoom
+    },
     data(){
         return{
              posts : [{"id": "1", "name": "ruby", "desc": "A red and beautiful ruby"},
@@ -57,6 +63,7 @@ export default {
                 {"id ": "2", "name": "sapphire", "desc": "A blue and beautiful sapphire"}, {"id": "3", "name": "emerald", "desc": "A green and beautiful emerald"}],
             error: [],
             link: "https://cdbstorage01.blob.core.windows.net/images/01_ohrring_tn.jpg",
+            link_big:"https://cdbstorage01.blob.core.windows.net/images/01_ohrring.jpg",
             headers:[
                 {
                     text:'ID',
@@ -75,6 +82,15 @@ export default {
     methods:{
         goToVideoplayer(){
             this.$router.push({path:'videoplayer'})
+        },
+        async buyProduct(p){
+         try {
+             const response = await axios.post("https://queueorder.azurewebsites.net/api/queueorder",{pid:p.id})
+             this.posts = response.data
+         } catch (e) {
+             this.error.push(e)
+         }
+
         }
     }
 
