@@ -6,21 +6,24 @@
         <h2>SCHNELL</h2>
         
     </v-row>
-    <v-row>
-    <v-col v-for="p in posts" :key="p.id" cols="2">    
-    <v-card max-height="450">
+                        <v-img
+            :src="link_aws"
+            height="150"
+            width="150"
+            contain
+            style="position:absolute;top:205px;left:20px"
+            >POWERED BY</v-img> 
+    <v-row class="justify-center">
+
+
+    <v-col v-for="p in posts" :key="p.id" cols="3">    
+    <v-card min-height="490" style="position:relative;bottom:100px">
         <v-card-title class="justify-center">{{p.name}}</v-card-title>
         <v-card-text class="text-center">
             <p>{{p.desc}}</p>
-            <!-- <v-img
-            :src="link"
-            height="200"
-            width="200"
-            style="position:relative;left:30px"
-            ></v-img> -->
-            <inner-image-zoom :src="link" :zoomSrc="link_big" />
+            <inner-image-zoom :src="p['tn-image-link']" :zoomSrc="p['image-link']" />
 
-
+           
         </v-card-text>
         <v-card-actions class="justify-center">
             <v-spacer></v-spacer>
@@ -38,7 +41,19 @@
         </v-card-actions>
     </v-card>
 </v-col>
+
+
+
   </v-row>
+  
+            <v-img
+            :src="link_azure"
+            height="150"
+            width="150"
+            contain
+            style="position:absolute;top:190px; left:1300px"
+            >
+            POWERED BY</v-img> 
 
 </v-app>
   
@@ -55,15 +70,11 @@ export default {
     },
     data(){
         return{
-             posts : [{"id": "1", "name": "ruby", "desc": "A red and beautiful ruby"},
-                {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"},
-                {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"},
-                {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"},
-                {"id": "5", "name": "ruby", "desc": "A red and beautiful ruby"}, 
-                {"id ": "2", "name": "sapphire", "desc": "A blue and beautiful sapphire"}, {"id": "3", "name": "emerald", "desc": "A green and beautiful emerald"}],
+            posts:[],
             error: [],
-            link: "https://cdbstorage01.blob.core.windows.net/images/01_ohrring_tn.jpg",
-            link_big:"https://cdbstorage01.blob.core.windows.net/images/01_ohrring.jpg",
+            link_aws: "https://cdbstorage01.blob.core.windows.net/images/Amazon_Web_Services_Logo.svg",
+            link_azure:"https://cdbstorage01.blob.core.windows.net/images/Microsoft_Azure_Logo.svg",
+            showDialog:false,
             headers:[
                 {
                     text:'ID',
@@ -86,22 +97,26 @@ export default {
         async buyProduct(p){
          try {
              const response = await axios.post("https://queueorder.azurewebsites.net/api/queueorder",{pid:p.id})
+             if(response.status === "200"){
+                 alert("Bestellung aufgegeben; SMS kommt")
+             }
+         } catch (e) {
+             this.error.push(e)
+             alert("Fehler beim Aufgeben der Bestellung")
+         }
+
+        }
+
+        
+    },
+     async created(){
+         try {
+             const response = await axios.get("https://fetchproducts.azurewebsites.net/api/pfetch")
              this.posts = response.data
          } catch (e) {
              this.error.push(e)
          }
-
-        }
-    }
-
-    // async created(){
-    //     try {
-    //         const response = await axios.get("https://awazure-apim.azure-api.net/pfetch/pfetch")
-    //         this.posts = response.data
-    //     } catch (e) {
-    //         this.error.push(e)
-    //     }
-    // },
+     },
 
 }
 </script>

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 //import Home from '../views/Home.vue'
 import FrontPage from '../components/FrontPage.vue'
 import ProductCard from '../components/ProductCard.vue'
-import VideoPlayer from '../components/VideoPlayer.vue'
+import VideoPlayer from '../components/VideoPlayerProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/videoplayer',
     name: 'VideoPlayer',
-    component: VideoPlayer
+    component: VideoPlayer,
   }
 ]
 
