@@ -51,7 +51,7 @@
             height="150"
             width="150"
             contain
-            style="position:absolute;top:190px; left:1300px"
+            style="position:absolute;top:190px; left:1550px"
             >
             POWERED BY</v-img> 
 
