@@ -74,7 +74,7 @@ export default {
             error: [],
             link_aws: "https://cdbstorage01.blob.core.windows.net/images/Amazon_Web_Services_Logo.svg",
             link_azure:"https://cdbstorage01.blob.core.windows.net/images/Microsoft_Azure_Logo.svg",
-            showDialog:false,
+            showDialog:true,
             headers:[
                 {
                     text:'ID',
